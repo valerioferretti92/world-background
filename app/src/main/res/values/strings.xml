@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">World Backgrounds</string>
+    <string name="search">Search photos</string>
+    <string name="clear_search">Clear Search</string>
+    <string name="new_picture_title">New PhotoGallery Picture</string>
+    <string name="new_picture_text">You have new pictures in PhotoGallery</string>
+    <string name="pager_activity_error">PagerActivity couldn\'t determine which activity to start</string>
+    <string name="categories_tab">CATEGORIES</string>
+    <string name="search_tab">SEARCH</string>
+    <string name="downloads_tab">DOWNLOADS</string>
+    <string name="starting_download">Download started...</string>
+    <string name="download_message">To watch the image fullscreen download it first with the button below!</string>
+    <string name="delete_image">Delete image</string>
+    <string name="setting_wallpaper">Setting wallpaper on your device...</string>
+    <string name="wallpaper_set">The wallpaper has been set properly on your device</string>
+    <string name="bitmap_download_failed">The picture couldn\'t be downloaded!</string>
+    <string name="set_wallpaper">Set wallpaper</string>
+    <string name="start_wallpaper_service">Start alarm</string>
+    <string name="end_wallpaper_service">End alarm</string>
+    <string name="wallpaper_timer_started">The wallpaper timer has been set!</string>
+    <string name="wallpaper_timer_ended">The wallpaper timer has been deleted!</string>
+</resources>
