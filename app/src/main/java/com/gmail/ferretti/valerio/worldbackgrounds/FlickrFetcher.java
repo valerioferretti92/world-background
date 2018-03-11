@@ -35,7 +35,7 @@ public class FlickrFetcher {
             appendQueryParameter("api_key", API_KEY).
             appendQueryParameter("format", "json").
             appendQueryParameter("nojsoncallback", "1").
-            appendQueryParameter("group_id", "40961104@N00").
+            appendQueryParameter("group_id", "94834891@N00").
             appendQueryParameter("extras", "url_z, url_k, views, description, tags, owner_name").
             appendQueryParameter("sort", "interestingness-desc").
             build();
