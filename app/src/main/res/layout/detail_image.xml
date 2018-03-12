@@ -53,7 +53,7 @@
                 android:indeterminate="true"
                 android:progressDrawable="@drawable/circular_progress_bar"
                 android:elevation="10dp"
-                android:indeterminateTint="@color/colorWhite"
+                android:indeterminateTint="@color/colorProgressBarDownload"
                 android:layout_alignTop="@+id/floating_action_button"
                 android:layout_alignBottom="@+id/floating_action_button"
                 android:layout_alignLeft="@+id/floating_action_button"

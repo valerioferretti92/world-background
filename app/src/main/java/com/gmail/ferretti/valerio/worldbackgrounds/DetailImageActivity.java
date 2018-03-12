@@ -15,6 +15,8 @@ import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +30,7 @@ import com.google.android.flexbox.FlexboxLayout;
 import com.squareup.picasso.Target;
 
 import java.util.List;
+import java.util.zip.Inflater;
 
 /**
  * Created by ferretti on 29/11/17.
@@ -132,8 +135,12 @@ public class DetailImageActivity extends AppCompatActivity {
         //Setting up tags
         for(int i = 0; i < mTags.length; i++){
             if( !(mTags[i].length() >= 20) && !mTags[i].equals("") ){
+
+                LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View view = inflater.inflate(R.layout.custom_button, null);
+                Button button = view.findViewById(R.id.custom_button);
                 final String text = mTags[i];
-                Button button = new Button(this);
+
                 button.setText(text);
                 button.setOnClickListener(new View.OnClickListener(){
                     @Override
@@ -142,7 +149,7 @@ public class DetailImageActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
-                tagsFlexboxLayout.addView(button);
+                tagsFlexboxLayout.addView(view);
             }
         }
 
@@ -158,7 +165,7 @@ public class DetailImageActivity extends AppCompatActivity {
                     //Starting progress bar
                     mProgressBar.setVisibility(View.VISIBLE);
                     if(Build.VERSION.SDK_INT >= 21) {
-                        int color = ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary);
+                        int color = ContextCompat.getColor(getApplicationContext(), R.color.colorProgressBarDownload);
                         mProgressBar.setIndeterminateTintList(ColorStateList.valueOf(color));
                     }
 
@@ -170,7 +177,7 @@ public class DetailImageActivity extends AppCompatActivity {
                         public void onPictureDownloaded() {
                             //Add downloaded picture name to mDownloadedPicture list
                             mDownloadedPictures.add(mId);
-                            mFloatingActionButton.setBackgroundTintList(getResources().getColorStateList(R.color.colorPrimary));
+                            mFloatingActionButton.setBackgroundTintList(getResources().getColorStateList(R.color.colorSetBackground));
                             mFloatingActionButton.setImageResource(R.drawable.detail_btn_apply);
                             mProgressBar.setVisibility(View.GONE);
                         }
@@ -192,12 +199,12 @@ public class DetailImageActivity extends AppCompatActivity {
                     //Downloading image into target
                     storageUtils.downloadImageIntoStorage(mUrlFullsize, target);
 
-                }else {
+                }else{
 
                     //Starting the progress bar
                     mProgressBar.setVisibility(View.VISIBLE);
                     if(Build.VERSION.SDK_INT >= 21) {
-                        int color = ContextCompat.getColor(getApplicationContext(), R.color.colorAccent);
+                        int color = ContextCompat.getColor(getApplicationContext(), R.color.colorPrograssBarSetBackground);
                         mProgressBar.setIndeterminateTintList(ColorStateList.valueOf(color));
                     }
 
@@ -209,6 +216,7 @@ public class DetailImageActivity extends AppCompatActivity {
                             mFloatingActionButton.setBackgroundTintList(getResources().getColorStateList(R.color.colorDone));
                             mFloatingActionButton.setImageResource(R.drawable.ic_done);
                             mProgressBar.setVisibility(View.GONE);
+                            mFloatingActionButton.setEnabled(false);
                         }
                     });
                     storageUtils.setWallpaper(mId);
@@ -224,12 +232,14 @@ public class DetailImageActivity extends AppCompatActivity {
         mDownloadedPictures = new StorageUtils(getApplicationContext()).getDownloadedPicturesNames();
 
         if(!mDownloadedPictures.contains(mId)){
-            mFloatingActionButton.setBackgroundTintList(getResources().getColorStateList(R.color.colorAccent));
+            mFloatingActionButton.setBackgroundTintList(getResources().getColorStateList(R.color.colorDownload));
             mFloatingActionButton.setImageResource(R.drawable.ic_download);
         }else{
-            mFloatingActionButton.setBackgroundTintList(getResources().getColorStateList(R.color.colorPrimary));
+            mFloatingActionButton.setBackgroundTintList(getResources().getColorStateList(R.color.colorSetBackground));
             mFloatingActionButton.setImageResource(R.drawable.detail_btn_apply);
         }
+
+        mFloatingActionButton.setEnabled(true);
     }
 
 
