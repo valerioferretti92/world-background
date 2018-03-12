@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -67,11 +68,10 @@ public class CategoryFragment extends Fragment {
             mTextView.setOnClickListener(this);
         }
 
-        public void bind(int resource, String text) {
-            mText = text;
-            text = text.substring(0,1).toUpperCase() + text.substring(1);
-            mTextView.setText(text);
-            Picasso.with(getActivity()).load(resource).into(mImageView);
+        public void bind(String queryText, String categoryLabel, String assetPath){
+            mText = queryText;
+            mTextView.setText(categoryLabel);
+            Picasso.with(getActivity()).load(assetPath).into(mImageView);
         }
 
         @Override
@@ -99,16 +99,10 @@ public class CategoryFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(CategoryHolder holder, int position) {
-
-            //Getting the item
-            String categoryName = mTags.get(position);
-            int backgroundId = getResources().getIdentifier(
-                    categoryName,
-                    "drawable",
-                    getActivity().getPackageName());
-
-            //Setting up background and text
-            holder.bind(backgroundId, categoryName);
+            String queryText = mTags.get(position);
+            String categoryLabel = queryText.substring(0,1).toUpperCase() + queryText.substring(1);
+            String assetPath = "file:///android_asset/" + queryText + ".jpg";
+            holder.bind(queryText, categoryLabel, assetPath);
         }
 
         @Override
