@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
@@ -33,6 +34,13 @@ public class MainPagerActivity extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.screen_pager);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
 
+        //Setting up action bar
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayOptions(
+                ActionBar.DISPLAY_SHOW_HOME |
+                ActionBar.DISPLAY_SHOW_TITLE |
+                ActionBar.DISPLAY_USE_LOGO);
+        actionBar.setIcon(R.drawable.action_bar_icon);
 
         //Setting up the main screen list
         mMainScreens = new ArrayList<>();
