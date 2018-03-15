@@ -1,5 +1,6 @@
 package com.gmail.ferretti.valerio.worldbackgrounds;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -33,6 +34,7 @@ public class MainPagerActivity extends AppCompatActivity {
         setContentView(R.layout.screen_pager);
         mViewPager = (ViewPager) findViewById(R.id.screen_pager);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        tabLayout.setTabTextColors(R.color.colorTagButtonNormal, R.color.colorTagButtonNormal);
 
         //Setting up action bar
         ActionBar actionBar = getSupportActionBar();
@@ -97,5 +99,8 @@ public class MainPagerActivity extends AppCompatActivity {
         mViewPager.setCurrentItem(1);
 
         tabLayout.setupWithViewPager(mViewPager);
+        tabLayout.setTabTextColors(
+                getResources().getColor(R.color.colorTagButtonNormal),
+                getResources().getColor(R.color.colorPrimaryDark));
     }
 }
