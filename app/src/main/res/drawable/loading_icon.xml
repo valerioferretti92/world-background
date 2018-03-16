@@ -5,9 +5,9 @@
 
     <item
         android:drawable="@drawable/loading"
-        android:top="200dp"
-        android:bottom="200dp"
-        android:left="200dp"
-        android:right="200dp"/>
+        android:top="100dp"
+        android:bottom="100dp"
+        android:left="100dp"
+        android:right="100dp"/>
 
 </layer-list>

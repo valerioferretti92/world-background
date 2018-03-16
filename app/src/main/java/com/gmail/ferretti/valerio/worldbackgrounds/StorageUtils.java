@@ -218,6 +218,10 @@ public class StorageUtils {
         File thumbnail = new File(directoryThumbnail, imageName);
         if (wallpaper.delete()) Log.i(TAG,"Wallpaper on the disk deleted successfully!");
         if (thumbnail.delete()) Log.i(TAG,"Thumbnail on the disk deleted successfully!");
+
+        if(getDownloadedPicturesNames().isEmpty()) {
+            MainPagerActivity.updateViewPager();
+        }
     }
 
 

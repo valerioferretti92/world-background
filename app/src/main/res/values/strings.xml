@@ -19,4 +19,5 @@
     <string name="end_wallpaper_service">End alarm</string>
     <string name="wallpaper_timer_started">The wallpaper timer has been set!</string>
     <string name="wallpaper_timer_ended">The wallpaper timer has been deleted!</string>
+    <string name="no_internet_connection">Check your internet connection and swipe down to reload.</string>
 </resources>

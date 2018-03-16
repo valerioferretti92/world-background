@@ -180,6 +180,10 @@ public class DetailImageActivity extends AppCompatActivity {
                             mFloatingActionButton.setBackgroundTintList(getResources().getColorStateList(R.color.colorSetBackground));
                             mFloatingActionButton.setImageResource(R.drawable.detail_btn_apply);
                             mProgressBar.setVisibility(View.GONE);
+
+                            if(new StorageUtils(getApplicationContext()).getDownloadedPicturesNames().size() == 1){
+                                MainPagerActivity.updateViewPager();
+                            }
                         }
 
                         @Override

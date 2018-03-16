@@ -1,6 +1,9 @@
 package com.gmail.ferretti.valerio.worldbackgrounds;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -26,6 +29,7 @@ public class MainPagerActivity extends AppCompatActivity {
     private final Integer DOWNLOADS_SCREEN = 2;
 
     private ViewPager mViewPager;
+    private static FragmentStatePagerAdapter fragmentStatePagerAdapter;
     private List<Integer> mMainScreens;
 
     @Override
@@ -52,7 +56,7 @@ public class MainPagerActivity extends AppCompatActivity {
 
         //Setting up the view pager
         FragmentManager fragmentManager = getSupportFragmentManager();
-        mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
+        fragmentStatePagerAdapter = new FragmentStatePagerAdapter(fragmentManager) {
 
             @Override
             public Fragment getItem(int position) {
@@ -60,12 +64,28 @@ public class MainPagerActivity extends AppCompatActivity {
 
                 switch(screen){
                     case 0:
+
                         return CategoryFragment.newInstance();
+
                     case 1:
-                        return WorldBackgroundsFragment.newInstance();
+
+                        boolean isConnectionUp = NetworkUtils.isNetworkUpAndRunning(getApplicationContext());
+                        if(isConnectionUp) {
+                            return WorldBackgroundsFragment.newInstance();
+                        }else{
+                            return NoInternetFragment.newInstance();
+                        }
+
                     case 2:
-                        return DownloadsFragment.newInstance();
-                    default:
+
+                        ArrayList<String> downloadedPictures = new StorageUtils(getApplicationContext()).getDownloadedPicturesNames();
+                        if(downloadedPictures.isEmpty()){
+                            return NoDownloadsFragment.newInstance();
+                        }else {
+                            return DownloadsFragment.newInstance();
+                        }
+
+                        default:
                         Toast.makeText(
                                 getApplicationContext(),
                                 R.string.pager_activity_error,
@@ -73,7 +93,6 @@ public class MainPagerActivity extends AppCompatActivity {
                         return null;
                 }
             }
-
 
             @Override
             public int getCount() {
@@ -94,13 +113,23 @@ public class MainPagerActivity extends AppCompatActivity {
                         return null;
                 }
             }
-        });
 
+            @Override
+            public int getItemPosition(Object object) {
+                return POSITION_NONE;
+            }
+        };
+
+        mViewPager.setAdapter(fragmentStatePagerAdapter);
         mViewPager.setCurrentItem(1);
 
         tabLayout.setupWithViewPager(mViewPager);
         tabLayout.setTabTextColors(
                 getResources().getColor(R.color.colorTagButtonNormal),
                 getResources().getColor(R.color.colorPrimaryDark));
+    }
+
+    public static void updateViewPager(){
+        fragmentStatePagerAdapter.notifyDataSetChanged();
     }
 }
