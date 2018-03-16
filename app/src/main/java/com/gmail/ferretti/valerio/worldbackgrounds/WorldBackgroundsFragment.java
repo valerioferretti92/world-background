@@ -142,7 +142,10 @@ public class WorldBackgroundsFragment extends Fragment {
 
         public void bindGalleryItem(GalleryItem galleryItem){
             mGalleryItem = galleryItem;
-            Picasso.with(getActivity()).load(mGalleryItem.getUrlThumbnail()).into(mImageView);
+            Picasso.with(getActivity()).
+                    load(mGalleryItem.getUrlThumbnail()).
+                    placeholder(R.drawable.loading_icon).
+                    into(mImageView);
         }
 
         @Override

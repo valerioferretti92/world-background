@@ -93,7 +93,10 @@ public class TaggedPicturesActivity extends AppCompatActivity {
 
         public void bindGalleryItem(GalleryItem galleryItem){
             mGalleryItem = galleryItem;
-            Picasso.with(getApplicationContext()).load(mGalleryItem.getUrlThumbnail()).into(mImageView);
+            Picasso.with(getApplicationContext()).
+                    load(mGalleryItem.getUrlThumbnail()).
+                    placeholder(R.drawable.loading_icon).
+                    into(mImageView);
         }
 
         @Override
