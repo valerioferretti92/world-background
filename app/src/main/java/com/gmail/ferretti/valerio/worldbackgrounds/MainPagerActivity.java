@@ -1,9 +1,5 @@
 package com.gmail.ferretti.valerio.worldbackgrounds;
 
-import android.content.Context;
-import android.graphics.Color;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;

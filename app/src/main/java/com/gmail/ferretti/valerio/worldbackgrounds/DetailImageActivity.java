@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -14,6 +15,12 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -127,7 +134,40 @@ public class DetailImageActivity extends AppCompatActivity {
 
         //Setting up author and views
         if(!mAuthorName.equals("") ) {
-            authorTextView.setText("Author: " + mAuthorName + "\n" + "Views: " + mViews);
+
+            //Setting up a SpannableString to format the author name as a link
+            Spannable spannableAuthorViews = new SpannableString("Author: " + mAuthorName + "\n" + "Views: " + mViews);
+            String authorViewsString = spannableAuthorViews.toString();
+            int startIndex = authorViewsString.indexOf(mAuthorName);
+            int endIndex = startIndex + mAuthorName.length();
+            SpannableString spannableStringAuthorViews = new SpannableString(spannableAuthorViews);
+
+            //Setting a ClickableSpan to associate to the author name
+            ClickableSpan authorSpan = new ClickableSpan() {
+
+                boolean wasPressed = false;
+
+                @Override
+                public void onClick(View widget) {
+                    Toast.makeText(getApplicationContext(), "Spannable text clicked", Toast.LENGTH_LONG).show();
+                    wasPressed = true;
+                }
+
+                @Override
+                public void updateDrawState(TextPaint ds) {
+                    ds.setUnderlineText(true);
+                    if(!wasPressed){
+                        ds.setColor(getResources().getColor(R.color.colorLinkNotPressed));
+                    }else{
+                        ds.setColor(getResources().getColor(R.color.colorLinkPressed));
+                    }
+                }
+            };
+
+            spannableStringAuthorViews.setSpan(authorSpan, startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            authorTextView.setText(spannableStringAuthorViews);
+            authorTextView.setMovementMethod(LinkMovementMethod.getInstance());
+
         }else{
             authorTextView.setText("Author: " + "unknown" + "\n" + "Views: " + mViews);
         }

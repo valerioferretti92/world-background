@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: mobi.upod:time-duration-picker-1.1.3">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/time-duration-picker-1.1.3.aar/895beb139f1a07be74d10fff95774cf7/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/time-duration-picker-1.1.3.aar/895beb139f1a07be74d10fff95774cf7/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/mobi.upod/time-duration-picker/1.1.3/6e47dc6260d5251506b3a13a7ed3b6b39993e4ca/time-duration-picker-1.1.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
