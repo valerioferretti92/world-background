@@ -16,7 +16,8 @@ public class QueryPreferences {
 
     private static final String PREF_SEARCH_QUERY = "SearchQuery";
     private static final String PREF_IS_ALARM_ON = "isAlarmOn";
-    private static final String PREF_DURATION = "duration";
+    private static final String PREF_DURATION = "Duration";
+    private static final String PREF_ONE_TIME_SCREEN = "isToBeShown";
 
     //Function to store and retrieve the query string
     public static String getStoredQuery(Context context){
@@ -47,6 +48,16 @@ public class QueryPreferences {
     public static void setIsAlarmOn(Context context, boolean isOn){
         PreferenceManager.getDefaultSharedPreferences(context).
                 edit().putBoolean(PREF_IS_ALARM_ON, isOn).apply();
+    }
+
+    public static boolean isOneTimeScreenToBeShown(Context context){
+        return PreferenceManager.getDefaultSharedPreferences(context).
+        getBoolean(PREF_ONE_TIME_SCREEN, true);
+    }
+
+    public static void setIsOneTimeScreenToBeShown(Context context, boolean isToBeShown){
+        PreferenceManager.getDefaultSharedPreferences(context).
+                edit().putBoolean(PREF_ONE_TIME_SCREEN, isToBeShown).apply();
     }
 
 }

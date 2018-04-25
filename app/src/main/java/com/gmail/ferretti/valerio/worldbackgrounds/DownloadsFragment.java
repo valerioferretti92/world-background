@@ -1,6 +1,5 @@
 package com.gmail.ferretti.valerio.worldbackgrounds;
 
-import android.app.DownloadManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,9 +17,6 @@ import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import mobi.upod.timedurationpicker.TimeDurationPicker;
-import mobi.upod.timedurationpicker.TimeDurationPickerDialog;
 
 
 /**
@@ -89,33 +85,13 @@ public class DownloadsFragment extends Fragment {
         switch(item.getItemId()){
             case R.id.wallpaper_timer:
 
-                final boolean shouldStartAlarm = !WallpaperService.isServiceAlarmOn(getActivity());
-
-                if(shouldStartAlarm) {
-                    long initialDuration = QueryPreferences.getStoredDuration(getActivity());
-                    if (initialDuration == 0) {
-                        initialDuration = 1000 * 3600 * 2; //2 hours in ms
-                    }
-
-                    TimeDurationPickerDialog timeDurationPickerDialog = new TimeDurationPickerDialog(
-                            getActivity(),
-                            new TimeDurationPickerDialog.OnDurationSetListener() {
-                                @Override
-                                public void onDurationSet(TimeDurationPicker view, long duration) {
-                                    QueryPreferences.setStoredDuration(getActivity(), duration);
-                                    QueryPreferences.setIsAlarmOn(getActivity(), shouldStartAlarm);
-                                    WallpaperService.setServiceAlarm(getActivity(), shouldStartAlarm);
-                                    getActivity().invalidateOptionsMenu();
-                                }
-                            },
-                            initialDuration);
-                    timeDurationPickerDialog.show();
+                if(QueryPreferences.isOneTimeScreenToBeShown(getActivity())) {
+                    Intent intent = TimerExplanationActivity.newIntent(getActivity());
+                    startActivity(intent);
                 }else{
-                    QueryPreferences.setIsAlarmOn(getActivity(), shouldStartAlarm);
-                    WallpaperService.setServiceAlarm(getActivity(), shouldStartAlarm);
+                    WallpaperTimerUtils.setupWallpaperTimer(getActivity());
                     getActivity().invalidateOptionsMenu();
                 }
-
                 break;
 
             default:
@@ -135,19 +111,18 @@ public class DownloadsFragment extends Fragment {
         public DownloadsHolder(View view){
             super(view);
             mImageView = view.findViewById(R.id.item_image_view);
-            mImageView.setOnClickListener(this);
         }
 
         public void bind(String imageName) {
             mImageName = imageName;
             new StorageUtils(getActivity()).loadImageFromStorage(imageName, mImageView, true);
+            mImageView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-
-                Intent intent = FullscreenImageActivity.newIntent(getActivity(), mImageName);
-                startActivity(intent);
+            Intent intent = FullscreenImageActivity.newIntent(getActivity(), mImageName);
+            startActivity(intent);
         }
     }
 

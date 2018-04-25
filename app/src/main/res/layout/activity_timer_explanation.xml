@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/one_timer_screen_relative_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="70dp">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/one_time_timer_screen"
+        android:adjustViewBounds="true"
+        android:id="@+id/one_time_timer_screen_image"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/one_time_timer_screen_checkbox"
+        android:layout_below="@id/one_time_timer_screen_image"
+        android:id="@+id/one_time_timer_screen_checkbox"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/set_a_timer_button"
+        android:layout_below="@id/one_time_timer_screen_checkbox"
+        android:id="@+id/one_time_timer_screen_button"/>
+
+</RelativeLayout>

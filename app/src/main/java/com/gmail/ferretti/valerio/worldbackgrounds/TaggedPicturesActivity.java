@@ -85,9 +85,7 @@ public class TaggedPicturesActivity extends AppCompatActivity {
 
         public PhotoHolder(View view){
             super(view);
-
             mImageView = (ImageView) view.findViewById(R.id.item_image_view);
-            itemView.setOnClickListener(this);
         }
 
 
@@ -96,18 +94,32 @@ public class TaggedPicturesActivity extends AppCompatActivity {
             Picasso.with(getApplicationContext()).
                     load(mGalleryItem.getUrlThumbnail()).
                     placeholder(R.drawable.loading_icon).
-                    into(mImageView);
+                    into(mImageView, new com.squareup.picasso.Callback(){
+                        @Override
+                        public void onSuccess() {
+                            mImageView.setClickable(true);
+                            mImageView.setOnClickListener(PhotoHolder.this);
+                        }
+
+                        @Override
+                        public void onError() {
+                            //Empty implementation
+                        }
+                    });
         }
 
         @Override
         public void onClick(View v) {
-            if(mImageView == null) return;
             Bitmap bitmap = ((BitmapDrawable) mImageView.getDrawable()).getBitmap();
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
 
             Intent intent = DetailImageActivity.newIntent(getApplicationContext(), baos.toByteArray(), mGalleryItem);
             startActivity(intent);
+        }
+
+        public void disableClickability(){
+            mImageView.setClickable(false);
         }
     }
 
@@ -129,6 +141,7 @@ public class TaggedPicturesActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(PhotoHolder holder, int position) {
+            holder.disableClickability();
             GalleryItem item = mItems.get(position);
             holder.bindGalleryItem(item);
         }

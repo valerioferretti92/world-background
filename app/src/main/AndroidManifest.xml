@@ -39,6 +39,8 @@
             android:name=".TaggedPicturesActivity"
             android:parentActivityName=".DetailImageActivity"/>
 
+        <activity android:name=".TimerExplanationActivity"/>
+
         <service android:name=".WallpaperService"/>
 
         <receiver
