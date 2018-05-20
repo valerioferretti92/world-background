@@ -1,7 +1,5 @@
 package com.gmail.ferretti.valerio.worldbackgrounds;
 
-import android.net.Uri;
-
 /**
  * Created by ferretti on 17/10/17.
  * Model class representing holding references to a picture

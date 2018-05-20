@@ -3,8 +3,10 @@ package com.gmail.ferretti.valerio.worldbackgrounds;
 import android.app.WallpaperManager;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -129,7 +131,12 @@ public class StorageUtils {
                         WallpaperManager wallpaperManager = WallpaperManager.getInstance(mContext);
                         Bitmap bitmapWallpaper = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
                         try {
-                            wallpaperManager.setBitmap(bitmapWallpaper);
+                            if(Build.VERSION.SDK_INT >= 24) {
+                                wallpaperManager.setBitmap(bitmapWallpaper, null, false,
+                                        WallpaperManager.FLAG_SYSTEM | WallpaperManager.FLAG_LOCK);
+                            }else{
+                                wallpaperManager.setBitmap(bitmapWallpaper);
+                            }
                             updateFabAfterWallpaperSet();
                         }catch(IOException exception){
                             Log.e(TAG, "Error when setting bitmap as wallpaper");
