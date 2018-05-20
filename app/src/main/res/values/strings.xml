@@ -21,5 +21,9 @@
     <string name="wallpaper_timer_ended">The wallpaper timer has been deleted!</string>
     <string name="no_internet_connection">Check your internet connection and swipe down to reload.</string>
     <string name="one_time_timer_screen_checkbox">Never show this screen again</string>
-    <string name="set_a_timer_button">Set a timer!</string>
+    <string name="enable_timer_button">ENABLE TIMER!</string>
+    <string name="disable_timer_button">DISABLE TIMER!</string>
+    <string name="one_time_explanation_string">
+        Set up at timer to change the\nbackground of your phone when\na time interval has elapsed.\nEnbale it with the button below!
+    </string>
 </resources>

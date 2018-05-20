@@ -18,6 +18,9 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 import java.util.List;
 
+import mobi.upod.timedurationpicker.TimeDurationPicker;
+import mobi.upod.timedurationpicker.TimeDurationPickerDialog;
+
 
 /**
  * Created by ferretti on 12/12/17.
@@ -60,6 +63,7 @@ public class DownloadsFragment extends Fragment {
         mDownloadedPictures.clear();
         mDownloadedPictures.addAll(new StorageUtils(getActivity()).getDownloadedPicturesNames());
         mRecyclerView.getAdapter().notifyDataSetChanged();
+        getActivity().invalidateOptionsMenu();
     }
 
 
@@ -88,10 +92,35 @@ public class DownloadsFragment extends Fragment {
                 if(QueryPreferences.isOneTimeScreenToBeShown(getActivity())) {
                     Intent intent = TimerExplanationActivity.newIntent(getActivity());
                     startActivity(intent);
+
                 }else{
-                    WallpaperTimerUtils.setupWallpaperTimer(getActivity());
+
+                    if(!WallpaperService.isServiceAlarmOn(getActivity())) {
+                        long initialDuration = QueryPreferences.getStoredDuration(getActivity());
+                        if (initialDuration == 0) {
+                            initialDuration = 1000 * 3600 * 2; //2 hours in ms
+                        }
+
+                        TimeDurationPickerDialog timeDurationPickerDialog = new TimeDurationPickerDialog(
+                                getActivity(),
+                                new TimeDurationPickerDialog.OnDurationSetListener() {
+                                    @Override
+                                    public void onDurationSet(TimeDurationPicker view, long duration) {
+                                        QueryPreferences.setStoredDuration(getActivity(), duration);
+                                        QueryPreferences.setIsAlarmOn(getActivity(), true);
+                                        WallpaperService.setServiceAlarm(getActivity(), true);
+                                    }
+                                },
+                                initialDuration);
+                        timeDurationPickerDialog.show();
+                    }else{
+                        QueryPreferences.setIsAlarmOn(getActivity(), false);
+                        WallpaperService.setServiceAlarm(getActivity(), false);
+                    }
+
                     getActivity().invalidateOptionsMenu();
                 }
+
                 break;
 
             default:

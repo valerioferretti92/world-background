@@ -13,4 +13,7 @@
     <color name="colorTagButtonPressed">#B2E2F5</color>
     <color name="colorLinkNotPressed">#0000EE</color>
     <color name="colorLinkPressed">#551A8B</color>
+    <color name="colorExplanationActivityBackground">#00B0FF</color>
+    <color name="colorWhite">#FFFFFF</color>
+
 </resources>
