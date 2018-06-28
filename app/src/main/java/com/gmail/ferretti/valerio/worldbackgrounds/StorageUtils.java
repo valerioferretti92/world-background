@@ -3,7 +3,6 @@ package com.gmail.ferretti.valerio.worldbackgrounds;
 import android.app.WallpaperManager;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -237,6 +236,7 @@ public class StorageUtils {
 
         ArrayList<String> downloadedPictureNames = new ArrayList<>();
         File directory = mContext.getDir(mImageDirectory, Context.MODE_PRIVATE);
+
         for(File picture: directory.listFiles()){
             downloadedPictureNames.add(picture.getName());
         }

@@ -23,8 +23,6 @@ public class WallpaperService extends IntentService {
 
     private static final String TAG = "WallpaperService";
 
-    private static Context mContext;
-
     public WallpaperService(){
         super(TAG);
     }
@@ -35,7 +33,7 @@ public class WallpaperService extends IntentService {
         Log.i(TAG, "New WallpaperService intent received!");
 
         //Setting up StorageUtils object
-        final StorageUtils storageUtils = new StorageUtils(mContext);
+        final StorageUtils storageUtils = new StorageUtils(getApplicationContext());
         storageUtils.setWallpaperSetListener(new StorageUtils.WallpaperSetListener() {
             @Override
             public void onWallpaperSet() {
@@ -48,7 +46,7 @@ public class WallpaperService extends IntentService {
         Random random = new Random();
         int pictureIndex = random.nextInt(downloadedPictures.size());
         final String wallpaperName = downloadedPictures.get(pictureIndex);
-        Log.i(TAG, "Picture number " + pictureIndex + ", downloadedPicture.size() = " +downloadedPictures.size());
+        Log.i(TAG, "Picture number " + pictureIndex + ", downloadedPicture.size() = " + downloadedPictures.size());
 
         //Setting selected picture as wallpaper
         Handler uiHandler = new Handler(Looper.getMainLooper());
@@ -67,7 +65,6 @@ public class WallpaperService extends IntentService {
         Intent intent = WallpaperService.newIntent(context);
         PendingIntent pendingIntent = PendingIntent.getService(context, 0, intent, 0);
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        mContext = context;
 
         if(isOn){
             alarmManager.setRepeating(
