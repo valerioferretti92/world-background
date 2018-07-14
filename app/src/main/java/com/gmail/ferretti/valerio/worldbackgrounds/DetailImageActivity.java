@@ -162,10 +162,8 @@ public class DetailImageActivity extends AppCompatActivity {
 
                     //Starting progress bar
                     mProgressBar.setVisibility(View.VISIBLE);
-                    if(Build.VERSION.SDK_INT >= 21) {
-                        int color = ContextCompat.getColor(getApplicationContext(), R.color.colorProgressBarDownload);
-                        mProgressBar.setIndeterminateTintList(ColorStateList.valueOf(color));
-                    }
+                    int color = ContextCompat.getColor(getApplicationContext(), R.color.colorProgressBarDownload);
+                    mProgressBar.setIndeterminateTintList(ColorStateList.valueOf(color));
 
                     //Setting up storage utils object to make it able to update the UI
                     Log.i(TAG, "Downloading the image " + mId + " from " + mUrlFullsize);
@@ -205,10 +203,8 @@ public class DetailImageActivity extends AppCompatActivity {
 
                     //Starting the progress bar
                     mProgressBar.setVisibility(View.VISIBLE);
-                    if(Build.VERSION.SDK_INT >= 21) {
-                        int color = ContextCompat.getColor(getApplicationContext(), R.color.colorPrograssBarSetBackground);
-                        mProgressBar.setIndeterminateTintList(ColorStateList.valueOf(color));
-                    }
+                    int color = ContextCompat.getColor(getApplicationContext(), R.color.colorPrograssBarSetBackground);
+                    mProgressBar.setIndeterminateTintList(ColorStateList.valueOf(color));
 
                     Log.i(TAG, "Setting wallpaper");
                     StorageUtils storageUtils = new StorageUtils(getApplicationContext());
