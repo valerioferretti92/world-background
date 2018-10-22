@@ -31,10 +31,16 @@ with the selected pictures. Each tag button, if pressed, will bring up a
 new list of pictures with that tag in common.The following screenshots
 quickly summarize the functionalities described above...
 
-<img src="pictures/categories.png" width="200"/>
-<img src="pictures/image_detail.png" width="200"/>
-<img src="pictures/one_time_screen.png" width="200"/>
-<img src="pictures/downloads.png" width="200"/>
+<table> 
+  <tr> 
+    <td><img src="pictures/categories.png" width="200"/></td>
+    <td><img src="pictures/image_detail.png" width="200"/></td>
+  </tr>
+  <tr>
+    <td><img src="pictures/one_time_screen.png" width="200"/></td>
+    <td><img src="pictures/downloads.png" width="200"/></td>
+  </tr>
+</table>
 
 In the following section I am going to described the high level
 architecture I chose to implement this application and the stack of
